@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:property="http://ns.tibco.com/bw/property" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_OA33QDRmEeuUA4D0HlOIvw" targetNamespace="http://tns.tibco.com/bw/composite/CN_HA01" name="CN_HA01" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:property xmi:id="_OWOcMDRmEeuUA4D0HlOIvw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_OWStoDRmEeuUA4D0HlOIvw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_OWT7wDRmEeuUA4D0HlOIvw" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_OWWYADRmEeuUA4D0HlOIvw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_OWYNMDRmEeuUA4D0HlOIvw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_OWapcDRmEeuUA4D0HlOIvw" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_OWdFsDRmEeuUA4D0HlOIvw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_LxTL4DRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPAppServer" type="XMLSchema:string"/>
+  <sca:property xmi:id="_MukFYDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPSystemNumber" type="XMLSchema:string"/>
+  <sca:property xmi:id="_NRyHMDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPClient" type="XMLSchema:string"/>
+  <sca:property xmi:id="_N5pYcDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPUserName" type="XMLSchema:string"/>
+  <sca:property xmi:id="_OYU4gDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPPassword" type="property:password"/>
+  <sca:property xmi:id="_O3p40DRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPSystemName" type="XMLSchema:string"/>
+  <sca:property xmi:id="_PSeMkDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPMsgServer" type="XMLSchema:string"/>
+  <sca:property xmi:id="_Pu1YcDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPLogonGroup" type="XMLSchema:string"/>
+  <sca:property xmi:id="_QOODIDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPProgramID" type="XMLSchema:string"/>
+  <sca:property xmi:id="_QnthMDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPGatewayService" type="XMLSchema:string"/>
+  <sca:property xmi:id="_RBxnADRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPGatewayHost" type="XMLSchema:string"/>
+  <sca:property xmi:id="_RaRmkDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPSncMode" type="XMLSchema:string"/>
+  <sca:property xmi:id="_RzySwDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPSncPartnername" type="XMLSchema:string"/>
+  <sca:property xmi:id="_SL4psDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPSncQop" type="XMLSchema:string"/>
+  <sca:property xmi:id="_SlBicDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPSncMyname" type="XMLSchema:string"/>
+  <sca:property xmi:id="_TD2zgDRnEeuUA4D0HlOIvw" name="/APPLICATION/RESOURCES/SAP/CN/SAPSncLib" type="XMLSchema:string"/>
+  <sca:property xmi:id="_4mE54DR2EeuUBID0HlOIvw" name="/APPLICATION/RESOURCES/JDBC/MIS/JDBCDriver" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_6Zuo0DR2EeuUBID0HlOIvw" name="/APPLICATION/RESOURCES/JDBC/MIS/DatabaseURL" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_6bmREDR2EeuUBID0HlOIvw" name="/APPLICATION/RESOURCES/JDBC/MIS/UserName" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_6dQd8DR2EeuUBID0HlOIvw" name="/APPLICATION/RESOURCES/JDBC/MIS/Password" type="property:password" scaext:simpleValue="#!IpCqK8HkPgHxM7vmRyMvTA==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_6iEFcDR2EeuUBID0HlOIvw" name="/APPLICATION/RESOURCES/JDBC/MIS/MaximumConnections" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_BBni0DR3EeuUBID0HlOIvw" name="/APPLICATION/RESOURCES/JDBC/MIS/LoginTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_BPkfQDR3EeuUBID0HlOIvw" name="/APPLICATION/RESOURCES/JDBC/MIS/ConnectionIdleTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_8dpaoDRxEeuUBID0HlOIvw" name="/APPLICATION/DESTINATION/JMS/TOPIC/BaseInfoReload" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_szw8sDRmEeuUA4D0HlOIvw" name="ComponentSSD_CNMIS_0001" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_szw8sTRmEeuUA4D0HlOIvw" processName="CN.SSD_CNMIS_0001"/>
+  </sca:component>
+  <sca:component xmi:id="_aiY2EDRxEeuUBID0HlOIvw" name="ComponentInitializeBaseInfo" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_aiY2ETRxEeuUBID0HlOIvw" processName="EAI.InitializeBaseInfo"/>
+  </sca:component>
+  <sca:component xmi:id="_ogaQIDRxEeuUBID0HlOIvw" name="ComponentReloadBaseInfo" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_ogaQITRxEeuUBID0HlOIvw" processName="EAI.ReloadBaseInfo"/>
+  </sca:component>
+  <sca:component xmi:id="_mETf8DgoEeus7NMATdxz3Q" name="Component1SSD_CNMIS_0001" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_mETf8TgoEeus7NMATdxz3Q" processName="SSD_CNMIS_0001"/>
+  </sca:component>
+  <sca:component xmi:id="_mEV8MDgoEeus7NMATdxz3Q" name="ComponentSSD_CNMIS_0001_v2" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_mEV8MTgoEeus7NMATdxz3Q" processName="SSD_CNMIS_0001_v2" autoStart="false"/>
+  </sca:component>
+</sca:composite>

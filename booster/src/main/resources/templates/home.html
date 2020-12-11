@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+</head>
+<body>
+	<div class="container">
+		<div>
+			<h1>Component Controller</h1>
+			<form action="/component/file" method="post" enctype="multipart/form-data">
+				<label for="pathName">modoule.bwm file:</label>
+				<input type="file" id="files" name="files" accept=".bwm" onchange="filePath(this)">
+				<button type="submit" id="submitButton">GO</button>
+			</form>
+			<!-- <form action="/component/file" method="post">
+				<label for="pathName">Path</label>
+				<input type="text" id="pathName" name="pathName" onkeyup="keyEvent()">
+				<button type="submit" id="submitButton" disabled>GO</button>
+			</form> -->
+		</div>
+	</div>
+	<p th:text="${message}" style="color: tomato;"></p>
+	<!-- /container -->
+
+	<script>
+		function filePath(files) {
+   			console.log(files[0]);
+		}
+
+		function keyEvent() {
+			var pathName = document.getElementById("files");
+		 	var submitButton = document.getElementById("submitButton");
+		 	console.log(pathName.value.length);
+		 	if (pathName.value.length > 0) {
+		 		submitButton.disabled = false;
+		 	} else {
+				submitButton.disabled = true;
+			}
+		}
+	</script>
+</body>
+
+</html>

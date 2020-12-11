@@ -1,0 +1,5 @@
+-Dbw.application.disable.autostart.CN_HA01.application.1.0.ComponentSSD_CNMIS_0001=false
+-Dbw.application.disable.autostart.CN_HA01.application.1.0.ComponentInitializeBaseInfo=false
+-Dbw.application.disable.autostart.CN_HA01.application.1.0.ComponentReloadBaseInfo=false
+-Dbw.application.disable.autostart.CN_HA01.application.1.0.Component1SSD_CNMIS_0001=true
+-Dbw.application.disable.autostart.CN_HA01.application.1.0.ComponentSSD_CNMIS_0001_v2=true
