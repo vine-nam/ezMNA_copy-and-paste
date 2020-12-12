@@ -1,14 +1,6 @@
 package com.cspi.booster.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,38 +22,26 @@ import com.cspi.booster.file.FileService;
 public class ComponentController {
 
 	private final ComponentService componentService;
-	private ApplicationService applicationService;
+	private final ApplicationService applicationService;
 	
 	@Autowired
-	public ComponentController(ComponentService componentService) {
+	public ComponentController(ComponentService componentService, ApplicationService applicationService) {
 		this.componentService = componentService;
+		this.applicationService = applicationService;
 	}
 	
 	@PostMapping("/component/file")
 	public String create(@RequestParam("files") MultipartFile file, RedirectAttributes redirectAttributes) {
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-		Document document = null;
 		componentService.clear();
 		try {
-			DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-			document = documentBuilder.parse(file.getInputStream());
-			//document = (Document) new FileService(file).read();
+			Document document = (Document) new FileService().readXml(file);
 			componentService.createComponent(document);
+			applicationService.createApplication(document);
 		} catch (Exception e) {
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("message", e.getMessage());
 			return "redirect:/";
 		}
-
-		Map<String, Component> componentList = componentService.getComponentList();
-
-		for (String key : componentList.keySet()) {
-			Component component = componentList.get(key);
-			System.out.println(component.getComponentName() + " : " + component.getProcessName() + " : "
-					+ component.getIsAutoStart());
-		}
-		
-		applicationService = new ApplicationService(document);
 		
 		return "redirect:/componentList";
 	}
@@ -79,7 +59,7 @@ public class ComponentController {
 	@GetMapping("/componentList")
 	public String list(Model model) {
 		Map<String, Component> componentList = componentService.getComponentList();
-		Application appplicationInfo = new Application(applicationService.getApplicationName(), "1.0");
+		Application appplicationInfo = applicationService.getApplication();
 		model.addAttribute("components", componentList);
 		model.addAttribute("appplicationInfo", appplicationInfo);
 		return "component/componentList";

@@ -8,8 +8,8 @@
 		<div>
 			<h1>Component Controller</h1>
 			<form action="/component/file" method="post" enctype="multipart/form-data">
-				<label for="pathName">modoule.bwm file:</label>
-				<input type="file" id="files" name="files" accept=".bwm" onchange="filePath(this)">
+				<label for="pathName">module.bwm file:</label>
+				<input type="file" id="files" name="files" accept=".bwm">
 				<button type="submit" id="submitButton">GO</button>
 			</form>
 			<!-- <form action="/component/file" method="post">
@@ -20,13 +20,8 @@
 		</div>
 	</div>
 	<p th:text="${message}" style="color: tomato;"></p>
-	<!-- /container -->
 
 	<script>
-		function filePath(files) {
-   			console.log(files[0]);
-		}
-
 		function keyEvent() {
 			var pathName = document.getElementById("files");
 		 	var submitButton = document.getElementById("submitButton");

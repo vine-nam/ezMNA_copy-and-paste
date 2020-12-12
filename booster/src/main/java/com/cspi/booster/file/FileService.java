@@ -2,7 +2,6 @@ package com.cspi.booster.file;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,6 +17,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -28,9 +28,12 @@ public class FileService {
 	public FileService(String pathName) {
 		this.file = new File(pathName);
 	}
+	
 	public FileService(File file) {
 		this.file = file;
 	}
+	
+	public FileService() {}
 	
 	public Object read() throws ParserConfigurationException, SAXException, IOException {
 		String mimeType = new MimetypesFileTypeMap().getContentType(file);
@@ -51,6 +54,14 @@ public class FileService {
 		} catch (IOException e) {
 			throw new IOException(file.getPath() + " 파일을 찾을 수 없습니다.");
 		}
+	}
+	
+	public Document readXml(MultipartFile file) throws ParserConfigurationException, IOException, SAXException  {
+		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+		Document document = documentBuilder.parse(file.getInputStream());
+		document.getDocumentElement().normalize();
+		return document;
 	}
 	
 	public List<String> readText() throws IOException {

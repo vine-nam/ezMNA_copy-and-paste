@@ -5,19 +5,22 @@ import java.util.Map;
 import java.util.Scanner;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import com.cspi.booster.application.Application;
 import com.cspi.booster.application.ApplicationService;
 import com.cspi.booster.component.Component;
 import com.cspi.booster.component.ComponentService;
 import com.cspi.booster.component.ComponentServiceImpl;
+import com.cspi.booster.component.LocalComponentRespository;
 import com.cspi.booster.file.FileService;
 
 public class ComponentApp {
 
-	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
+	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, XPathExpressionException {
 		
 		Scanner myObj = new Scanner(System.in);
 		
@@ -25,7 +28,7 @@ public class ComponentApp {
 		String pathName = "module.bwm"; //myObj.nextLine(); 
 		
 		Document document = (Document) new FileService(pathName).read();
-		ComponentService componentService = new ComponentServiceImpl();
+		ComponentService componentService = new ComponentServiceImpl(new LocalComponentRespository());
 
 		componentService.createComponent(document);
 
@@ -39,9 +42,11 @@ public class ComponentApp {
 
 		// -Dbw.application.disable.autostart.AP_FT01.application.1.0.ComponentRDD_MISMST_000=true
 		// -Dbw.application.disable.autostart.애플리케이션이름.버전.컴포넌트이름=true
-		ApplicationService applicationService = new ApplicationService(document);
-		String applicationName = applicationService.getApplicationName();
-		String applicationVersion = "1.0";
+		ApplicationService applicationService = new ApplicationService();
+		applicationService.createApplication(document);
+		Application application = applicationService.getApplication();
+		String applicationName = application.getName();
+		String applicationVersion = application.getVersion();
 		boolean viewAll = true;
 		StringBuilder stringBuilder = new StringBuilder();
 		for (String key : componentList.keySet()) {

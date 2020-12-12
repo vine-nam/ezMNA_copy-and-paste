@@ -9,23 +9,20 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 public class ApplicationService {
-
-	Document document;
 	
-	public ApplicationService(Document document) {
-		this.document = document;
-	}
+	ApplicationRepository applicationRepository = new ApplicationRepository();
 
-	public String getApplicationName() {
+	public void createApplication(Document document) throws XPathExpressionException {
 		XPath xpath = XPathFactory.newInstance().newXPath();
 		String expression = "/composite";
-		try {
-			Node result = (Node) xpath.evaluate(expression, document, XPathConstants.NODE);
-			return result.getAttributes().getNamedItem("name").getNodeValue();
-		} catch (XPathExpressionException e) {
-			e.printStackTrace();
-		}
-		return null;
+		Node result = (Node) xpath.evaluate(expression, document, XPathConstants.NODE);
+		String appName = result.getAttributes().getNamedItem("name").getNodeValue();
+		Application application = new Application(appName);
+		applicationRepository.save(application);
+	}
+
+	public Application getApplication() {
+		return applicationRepository.application;
 	}
 
 }

@@ -1,10 +1,8 @@
 package com.cspi.booster.component;
 
 import java.util.List;
-import java.util.Iterator;
 import java.util.Map;
 
-import javax.xml.namespace.NamespaceContext;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -15,7 +13,11 @@ import org.w3c.dom.NodeList;
 
 public class ComponentServiceImpl implements ComponentService{
 
-	ComponentRepository componentRepository = new LocalComponentRespository();
+	ComponentRepository componentRepository;
+
+	public ComponentServiceImpl(ComponentRepository componentRepository) {
+		this.componentRepository = componentRepository;
+	}
 	
 	public void createComponent(Document document) {
 		XPath xpath = XPathFactory.newInstance().newXPath();

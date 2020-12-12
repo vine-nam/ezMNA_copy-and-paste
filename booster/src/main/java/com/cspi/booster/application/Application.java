@@ -10,8 +10,13 @@ public class Application {
 		this.version = version;
 	}
 	
-	public Application() {}
+	public Application(String name) {
+		this.name = name;
+		this.version = "1.0";
+	}
 	
+	public Application() {}
+
 	public String getName() {
 		return name;
 	}

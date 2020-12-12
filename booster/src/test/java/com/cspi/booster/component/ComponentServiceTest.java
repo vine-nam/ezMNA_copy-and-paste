@@ -18,12 +18,14 @@ import com.cspi.booster.file.FileService;
 
 public class ComponentServiceTest {
 
+	ComponentRepository componentRepository = new LocalComponentRespository();
+	
 	@Test
 	@Disabled
 	void createComponent() throws ParserConfigurationException, SAXException, IOException {
 		String pathName = "module.bwm";
 		Document document = (Document) new FileService(pathName).read();
-		ComponentService componentService = new ComponentServiceImpl();
+		ComponentService componentService = new ComponentServiceImpl(componentRepository);
 		
 		componentService.createComponent(document);
 		assertTrue(componentService.getComponentList().size()>0);
@@ -34,7 +36,7 @@ public class ComponentServiceTest {
 	void createComponentText() throws ParserConfigurationException, SAXException, IOException {
 		String pathName = "test.txt";
 		List list = (List) new FileService(pathName).read();
-		ComponentService componentService = new ComponentServiceImpl();
+		ComponentService componentService = new ComponentServiceImpl(componentRepository);
 		
 		componentService.createComponent(list);
 		assertTrue(componentService.getComponentList().size()>0);
@@ -44,7 +46,7 @@ public class ComponentServiceTest {
 	void createComponentBoth() throws ParserConfigurationException, SAXException, IOException {
 		String pathName = "module.bwm";
 		Document document = (Document) new FileService(pathName).read();
-		ComponentService componentService = new ComponentServiceImpl();
+		ComponentService componentService = new ComponentServiceImpl(componentRepository);
 		
 		componentService.createComponent(document);
 		assertTrue(componentService.getComponentList().size()>0);

@@ -29,13 +29,35 @@ pre {
     margin-left: 2.5em;
 }
 
+#applicationName {
+	width: 65px; 
+}
+
+#applicationVersion {
+	width: 35px; 
+}
+
 #copyButton {
     position: absolute;
     right: -1px;
     top: -1px;
 }
 
+#properties {
+	font-family: auto;
+}
+
+.optionBox > div {
+	border: 1px solid; 
+	position: relative; 
+	min-height: 36px;
+}
+
 @media (min-width: 1100px) {
+	.container {
+	    grid-template-columns: repeat(2, 1fr);
+	}
+
     .container > div:nth-child(2){
         grid-column: 2;
         grid-row: 1;
@@ -50,11 +72,11 @@ pre {
             <div class="applicationField">
                 <div>
 		            <label for="applicationName">Application Name: </label>
-		            <input id="applicationName" type="text" th:value="${appplicationInfo.name}" style="width: 65px;" onkeyup="updateAppName(this);"/>
+		            <input id="applicationName" type="text" th:value="${appplicationInfo.name}" onkeyup="updateAppName(this);"/>
 	            </div>
 	            <div>
 		            <label for="applicationVersion">Application Version: </label>
-		            <input id="applicationVersion" type="text" th:value="${appplicationInfo.version}" style="width: 35px;" onkeyup="updateAppVersion(this);"/>
+		            <input id="applicationVersion" type="text" th:value="${appplicationInfo.version}" onkeyup="updateAppVersion(this);"/>
 	            </div>
 	        </div>
 	        <div>
@@ -83,11 +105,11 @@ pre {
 			</div>
 		</div>
 		
-		<div>
+		<div class="optionBox">
             <h3>BW_JAVA_OPTS</h3>
-	        <div style="border: 1px solid; position: relative; min-height: 36px;">
+	        <div>
                 <button id="copyButton" onclick="copyToCriptboard(this)">Copy</button>
-	            <pre id="properties" style="font-family: auto;"></pre>
+	            <pre id="properties"></pre>
 	        </div>
         </div>
 	</div>
@@ -111,6 +133,7 @@ pre {
 	            if(!viewAll && components[keys[i]].isAutoStart) {        
 	                continue;
 	            }  
+	            //-Dbw.application.disable.autostart.애플리케이션이름.버전.컴포넌트이름=true
                 data += "-Dbw.application.disable.autostart." + appName + ".application." + appVersion + "." 
                 	+  keys[i] + "=" + !components[keys[i]].isAutoStart + "\r\n";   
 	        }
@@ -140,7 +163,6 @@ pre {
             propertyData();
         }
 
-        //-Dbw.application.disable.autostart.애플리케이션이름.버전.컴포넌트이름=true
         function propertyUpdate(box) {
             components[box.id].isAutoStart = box.checked;
             propertyData();
