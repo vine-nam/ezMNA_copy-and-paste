@@ -1,0 +1,16 @@
+{
+    "name": "My First App",
+    "description": "확장 프로그램 공부",
+    "version": "0.0.0.1",
+    "manifest_version": 2,
+    "icons": {
+      "128": "icon.png"
+    },
+    "browser_action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+    "permissions": [
+        "activeTab"
+    ]
+  }
