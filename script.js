@@ -1,42 +1,84 @@
-// 컨텐트 페이지의 #user 입력된 값이 변경 되었을 때 
-document.querySelector('#user').addEventListener('change', function() {
-    // 컨텐트 페이지에 몇개의 단어가 등장하는지 계상해 주세요,
-    var user = document.querySelector('#user').value;
-
-    // 컨텐트 페이지를 대상으로 코드를 실행해주세요.
-    chrome.tabs.executeScript({
-        code:'document.querySelector("body").innerText'
-    }, function(result) { // 위의 코드가 실행된 후에 이 함수를 호출해 주세요.
-        var bodyText = result[0];
-        var bodyNum = bodyText.split(" ").length;
-        var myNum = bodyText.match(new RegExp('\\b('+user+')\\b', 'gi')).length;
-    
-        var per = myNum/bodyNum*100;
-        per = per.toFixed(1);
-        document.querySelector('#result').innerText = myNum + '/' + bodyNum + ' (' + (per) + '%)';
-    });
-})
-
-
-
-function hello(e) {
+/*
+function copyFunc(e) {
     console.log("hello");
     if(document.querySelector("#myApp") !== null) { 
         document.querySelector("#myApp").remove();
     }
     var top = e.pageY - 40 + "px";
     var left = e.pageX + 10 + "px";
-    var buttonTag = '<button id="myApp" style="position: absolute; top: ' + top + '; left: ' + left + ';">^^</button>';
-    document.body.innerHTML += buttonTag;
+    var buttonTag = document.createElement("button");
+    buttonTag.innerText = "copy"
+    buttonTag.setAttribute("id", "myApp");
+    buttonTag.style.cssText = 'z-index: 99999; position: absolute; top: ' + top + '; left: ' + left + ';';
+    document.body.append(buttonTag);
 
     document.querySelector("#myApp").addEventListener("click", function() {
-        console.log(document.querySelectorAll("input")[0].value);
+        var data=''; 
+        document.body.querySelectorAll('#interfaceBaseInfoPop td > input, #interfaceBaseInfoPop .chosen-single > span').forEach(function(e) {
+            data += ( e.tagName === "INPUT" ? e.value : e.innerText ) + ",";
+        });
+        console.log(data);
+
+        var tempElem = document.createElement('textarea');
+        tempElem.value = data;  
+        document.body.appendChild(tempElem);
+      
+        tempElem.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempElem);
+        document.querySelector("#myApp").remove();
     });
 }
+*/
 
-chrome.tabs.executeScript({
-    code: 'document.body.addEventListener("dblclick", ' + hello + ')'
-}, function(result) { 
-    console.log(result);
-    
+
+function copyData(element) {
+    data += ( element.tagName === "INPUT" ? element.value : element.innerText ) + ",";
+}
+
+function copyToClipborad(data) {
+    var tempElem = document.createElement('textarea');
+    tempElem.value = data;  
+    document.body.appendChild(tempElem);
+
+    tempElem.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempElem);
+}
+
+document.querySelector("#copy").addEventListener("click", function() {
+    var data=''; 
+    chrome.tabs.executeScript({
+        code: "var data=''; document.body.querySelectorAll('.popup_main').forEach(function(e) {if(e.parentElement.style.display === 'block') {e.querySelectorAll('td > input, .chosen-single > span').forEach(" + copyData + ");}});(function (){return data;})();"
+    }, function(result) {
+        copyToClipborad(result[0]);
+        document.querySelector('#textBox').innerText = 
+            result[0].length !== 0 ? "copied!!" : "failed..";
+    });
 });
+
+
+function insertData(element, index, array) {
+    var list = data.split(",");
+    if (element.tagName === "INPUT") {
+        element.value = list[index];
+    } else {
+        element.innerText = list[index];
+    }
+}
+
+document.querySelector("#past").addEventListener("click", function() {
+    var data = document.querySelector('#textBox').value;
+    chrome.tabs.executeScript({
+        code: "var data = '" + data + "'; document.body.querySelectorAll('.popup_main').forEach(function(e) {if(e.parentElement.style.display === 'block') {e.querySelectorAll('td > input, .chosen-single > span').forEach(" + insertData + ");}})"
+    });
+})
+
+
+/*
+chrome.tabs.executeScript({
+    code: 'document.addEventListener("dblclick", ' + copyFunc + ');'
+    //window.addEventListener("paste", ' + pastFunc + ');
+    }, function(result) { 
+});
+*/

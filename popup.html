@@ -10,20 +10,30 @@
             padding: 1rem;
         }
         #result {
-            font-size: 2.5rem;
+            font-size: 1.7rem;
         }
         textarea {
             width: 100%;
-            font-size: 2rem;
-
+            font-size: 1.7rem;
+        }
+        .container {
+            display: flex;
+            justify-content: flex-end;
+            margin: 0.5rem 0;
+        }
+        button {
+            font-size: 1.2rem;
+            margin-left: 0.5rem;
         }
     </style>
 </head>
 <body>
-    <h1>My First App ;)</h1>
-    <textarea id="user" rows="3"></textarea>
+    <textarea id="textBox" rows="3"></textarea>
     <div id="result"></div>
-    
+    <div class="container">
+        <button id="copy">COPY</button>
+        <button id="past">PASTE</button>
+    </div>
     <div>
         아이콘 제작자 <a href="https://www.flaticon.com/kr/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon"> www.flaticon.com</a>
     </div>
