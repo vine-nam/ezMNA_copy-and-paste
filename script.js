@@ -67,7 +67,7 @@ function insertData(element, index, array) {
     }
 }
 
-document.querySelector("#past").addEventListener("click", function() {
+document.querySelector("#paste").addEventListener("click", function() {
     var data = document.querySelector('#textBox').value;
     chrome.tabs.executeScript({
         code: "var data = '" + data + "'; document.body.querySelectorAll('.popup_main').forEach(function(e) {if(e.parentElement.style.display === 'block') {e.querySelectorAll('td > input, .chosen-single > span').forEach(" + insertData + ");}})"
@@ -78,7 +78,7 @@ document.querySelector("#past").addEventListener("click", function() {
 /*
 chrome.tabs.executeScript({
     code: 'document.addEventListener("dblclick", ' + copyFunc + ');'
-    //window.addEventListener("paste", ' + pastFunc + ');
+    //window.addEventListener("paste", ' + pasteFunc + ');
     }, function(result) { 
 });
 */
