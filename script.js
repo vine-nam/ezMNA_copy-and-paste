@@ -32,10 +32,6 @@ function copyFunc(e) {
 */
 
 
-function copyData(element) {
-    data += ( element.tagName === "INPUT" ? element.value : element.innerText ) + ",";
-}
-
 function copyToClipborad(data) {
     var tempElem = document.createElement('textarea');
     tempElem.value = data;  
@@ -47,9 +43,8 @@ function copyToClipborad(data) {
 }
 
 document.querySelector("#copy").addEventListener("click", function() {
-    var data=''; 
     chrome.tabs.executeScript({
-        code: "var data=''; document.body.querySelectorAll('.popup_main').forEach(function(e) {if(e.parentElement.style.display === 'block') {e.querySelectorAll('td > input, .chosen-single > span').forEach(" + copyData + ");}});(function (){return data;})();"
+        file: 'copy.js'
     }, function(result) {
         copyToClipborad(result[0]);
         document.querySelector('#textBox').innerText = 
