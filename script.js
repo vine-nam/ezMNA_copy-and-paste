@@ -52,20 +52,14 @@ document.querySelector("#copy").addEventListener("click", function() {
     });
 });
 
-
-function insertData(element, index, array) {
-    var list = data.split(",");
-    if (element.tagName === "INPUT") {
-        element.value = list[index];
-    } else {
-        element.innerText = list[index];
-    }
-}
-
 document.querySelector("#paste").addEventListener("click", function() {
     var data = document.querySelector('#textBox').value;
     chrome.tabs.executeScript({
-        code: "var data = '" + data + "'; document.body.querySelectorAll('.popup_main').forEach(function(e) {if(e.parentElement.style.display === 'block') {e.querySelectorAll('td > input, .chosen-single > span').forEach(" + insertData + ");}})"
+        code: 'var data = "' + data + '";'
+    }, function() {
+        chrome.tabs.executeScript({
+            file: 'paste.js'
+        });
     });
 })
 
