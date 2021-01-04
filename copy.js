@@ -1,12 +1,12 @@
 var data = "";
 
 function copyData(element) {
-    data += ( element.tagName === "INPUT" ? element.value : element.innerText ) + ",";
+    data += element.value + ",";
 }
 
 document.body.querySelectorAll(".popup_main").forEach(function (e) {
-  if (e.parentElement.style.display !== "none") {
-    e.querySelectorAll("td > input, .chosen-single > span").forEach(copyData);
+  if (e.parentElement.style.display === "block") {
+    e.querySelectorAll("td > input, select").forEach(copyData);
   }
 });
 
