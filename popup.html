@@ -21,9 +21,20 @@
             justify-content: flex-end;
             margin: 0.5rem 0;
         }
+        .container div {
+            margin-right: auto;
+        }
         button {
             font-size: 1.2rem;
             margin-left: 0.5rem;
+        }
+        .successMsg {
+            color: lawngreen;
+            font-size: 1.2rem;
+        }
+        .errorMsg {
+            color: red;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -31,6 +42,7 @@
     <textarea id="textBox" rows="3"></textarea>
     <div id="result"></div>
     <div class="container">
+        <div id="message"></div>
         <button id="copy">COPY</button>
         <button id="paste">PASTE</button>
     </div>

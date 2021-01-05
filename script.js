@@ -31,6 +31,10 @@ function copyFunc(e) {
 }
 */
 
+function messageDivInit() {
+    document.querySelector('#message').innerText = "";  
+    document.querySelector('#message').className = "";
+}
 
 function copyToClipborad(data) {
     var tempElem = document.createElement('textarea');
@@ -43,22 +47,31 @@ function copyToClipborad(data) {
 }
 
 document.querySelector("#copy").addEventListener("click", function() {
+    messageDivInit();
     chrome.tabs.executeScript({
         file: 'copy.js'
     }, function(result) {
         copyToClipborad(result[0]);
-        document.querySelector('#textBox').innerText = 
-            result[0].length !== 0 ? "copied!!" : "failed..";
+        var isSuccess = result[0].length !== 0;
+        document.querySelector('#message').innerText = isSuccess ? "copied!!" : "failed.."
+        document.querySelector('#message').classList.add(isSuccess ? "successMsg" : "errorMsg");
+        document.querySelector('#textBox').innerText = result[0];
     });
 });
 
 document.querySelector("#paste").addEventListener("click", function() {
     var data = document.querySelector('#textBox').value;
+    messageDivInit();
     chrome.tabs.executeScript({
         code: 'var data = "' + data + '";'
     }, function() {
         chrome.tabs.executeScript({
             file: 'paste.js'
+        }, function(error) {
+            if (error !== "") {
+                document.querySelector('#message').innerText = error;
+                document.querySelector('#message').classList.add("errorMsg");
+            }
         });
     });
 })
