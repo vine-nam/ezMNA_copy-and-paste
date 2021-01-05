@@ -55,7 +55,7 @@ document.querySelector("#copy").addEventListener("click", function() {
         var isSuccess = result[0].length !== 0;
         document.querySelector('#message').innerText = isSuccess ? "copied!!" : "failed.."
         document.querySelector('#message').classList.add(isSuccess ? "successMsg" : "errorMsg");
-        document.querySelector('#textBox').innerText = result[0];
+        document.querySelector('#textBox').value = result[0];
     });
 });
 
