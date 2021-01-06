@@ -16,13 +16,13 @@ function insertData(element, index, array) {
 
 var errorMsg = "";
 document.body.querySelectorAll(".popup_main").forEach(function (e) {
-  if (e.parentElement.style.display === "block") {
-    try {
-      e.querySelectorAll("td > input, select").forEach(insertData); 
-    } catch (error) {
-      errorMsg = error.message;
+    if (e.parentElement.style.display === "block") {
+        try {
+            e.querySelectorAll("td > input, select").forEach(insertData); 
+        } catch (error) {
+            errorMsg = error.message;
+        }
     }
-  }
 });
 
 errorMsg;
