@@ -51,11 +51,15 @@ document.querySelector("#copy").addEventListener("click", function() {
     chrome.tabs.executeScript({
         file: 'copy.js'
     }, function(result) {
-        copyToClipborad(result[0]);
-        var isSuccess = result[0].length !== 0;
-        document.querySelector('#message').innerText = isSuccess ? "copied!!" : "failed.."
-        document.querySelector('#message').classList.add(isSuccess ? "successMsg" : "errorMsg");
-        document.querySelector('#textBox').value = result[0];
+        if (result !== undefined && result.length > 0 && result[0].length > 0) {
+            copyToClipborad(result[0]);
+            document.querySelector('#message').innerText = "copied!!";
+            document.querySelector('#message').classList.add("successMsg");
+            document.querySelector('#textBox').value = result[0];
+        } else {
+            document.querySelector('#message').innerText = "failed..";
+            document.querySelector('#message').classList.add("errorMsg");
+        }
     });
 });
 
