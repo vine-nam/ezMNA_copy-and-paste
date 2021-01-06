@@ -6,7 +6,7 @@ function insertData(element, index, array) {
     } else {
         var optionElement = Object.values(element.options).find(e => e.value === list[index]);
         if (list[index] === "" || optionElement === undefined ) {
-            throw new Error(index + 1 + "번 째 값(" + list[index] + ")이 올바르지 않습니다.");
+            throw new Error(index + 1 + "번째 값(" + list[index] + ")이 올바르지 않습니다.");
         }
         element.value = list[index];
         element.nextSibling.querySelector("span").innerText = optionElement.innerText;

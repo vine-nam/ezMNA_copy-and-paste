@@ -1,6 +1,6 @@
 {
     "name": "App for ezMNA",
-    "description": "확장 프로그램 공부",
+    "description": "ezMNA 데이터 COPY & PASTE",
     "version": "0.0.0.1",
     "manifest_version": 2,
     "icons": {
