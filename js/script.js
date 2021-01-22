@@ -46,6 +46,17 @@ function copyToClipborad(data) {
     document.body.removeChild(tempElem);
 }
 
+document.querySelector("#clear").addEventListener("click", function() {
+    messageDivInit();
+    chrome.storage.sync.clear(function() {
+        document.querySelector("#textBox").value = '';
+        var error = chrome.runtime.lastError;
+        if (error) {
+            console.error(error);
+        }
+    });
+});
+
 document.querySelector("#copy").addEventListener("click", function() {
     messageDivInit();
     chrome.tabs.executeScript({
@@ -56,6 +67,11 @@ document.querySelector("#copy").addEventListener("click", function() {
             document.querySelector('#message').innerText = "copied!!";
             document.querySelector('#message').classList.add("successMsg");
             document.querySelector('#textBox').value = result[0];
+            
+            // 크롬 스토리지에 복사한 데이터 저장
+            chrome.storage.sync.set({
+                copiedText: result[0]
+            });
         } else {
             document.querySelector('#message').innerText = "failed..";
             document.querySelector('#message').classList.add("errorMsg");
@@ -80,6 +96,20 @@ document.querySelector("#paste").addEventListener("click", function() {
     });
 })
 
+// 복사한 데이터를 크롬 스토리지에 저장했다가 (popup을 실행할 때) 불러온다.
+chrome.storage.sync.get(function (data) {
+    if(data.copiedText) {
+        document.querySelector("#textBox").value = data.copiedText;
+    }
+});
+
+/* 
+// 클립보드에 데이터가 있으면 popup을 실행할 때 그 값을 textBox에 붙여 넣는다.
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector("#textBox").focus();
+    document.execCommand('paste');
+});
+*/
 
 /*
 chrome.tabs.executeScript({
