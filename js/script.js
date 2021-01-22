@@ -81,9 +81,14 @@ document.querySelector("#copy").addEventListener("click", function() {
 
 document.querySelector("#paste").addEventListener("click", function() {
     var data = document.querySelector('#textBox').value;
+    var alertData = {
+        flag: document.querySelector('#alert-flag').checked,
+        mail: document.querySelector('#alert-mail').checked,
+        sms: document.querySelector('#alert-sms').checked
+    };
     messageDivInit();
     chrome.tabs.executeScript({
-        code: 'var data = "' + data + '";'
+        code: 'var data = "' + data + '"; var alertData = ' + JSON.stringify(alertData) + ';'
     }, function() {
         chrome.tabs.executeScript({
             file: 'js/paste.js'

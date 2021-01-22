@@ -8,8 +8,24 @@
 </head>
 <body>
     <textarea id="textBox" rows="3"></textarea>
-    <div id="result"></div>
-    <div class="container">
+    <div class="alert-container">
+        <div class="alert-item">
+            운영 Alert 여부: 
+        </div>
+        <div class="alert-item">
+            <input type="checkbox" id="alert-flag" checked/>
+            <label for="alert-flag">Alert 사용</label>
+        </div>
+        <div class="alert-item">
+            <input type="checkbox" id="alert-mail" checked/>
+            <label for="alert-mail">메일 수신</label>
+        </div>
+        <div class="alert-item">
+            <input type="checkbox" id="alert-sms"/>
+            <label for="alert-sms">SMS 수신</label>
+        </div>
+    </div>
+    <div class="button-container">
         <div id="message"></div>
         <button id="clear">CLEAR</button>
         <button id="copy">COPY</button>

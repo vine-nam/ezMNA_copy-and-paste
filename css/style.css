@@ -9,12 +9,13 @@ textarea {
     width: 100%;
     font-size: 1.7rem;
 }
-.container {
+.button-container {
     display: flex;
     justify-content: flex-end;
     margin: 0.5rem 0;
+    align-items: flex-start;
 }
-.container div {
+.button-container div {
     margin-right: auto;
 }
 button {
@@ -28,4 +29,10 @@ button {
 .errorMsg {
     color: red;
     font-size: 1rem;
+}
+
+.alert-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
 }
