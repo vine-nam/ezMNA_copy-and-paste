@@ -46,6 +46,24 @@ function copyToClipborad(data) {
     document.body.removeChild(tempElem);
 }
 
+document.querySelector("#alert-flag").addEventListener("change", function() {
+    chrome.storage.sync.set({
+        alertFlag:  document.querySelector('#alert-flag').checked
+    });
+});
+
+document.querySelector("#alert-mail").addEventListener("change", function() {
+    chrome.storage.sync.set({
+        alertMail:  document.querySelector('#alert-mail').checked
+    });
+});
+
+document.querySelector("#alert-sms").addEventListener("change", function() {
+    chrome.storage.sync.set({
+        alertSms:  document.querySelector('#alert-sms').checked
+    });
+});
+
 document.querySelector("#clear").addEventListener("click", function() {
     messageDivInit();
     chrome.storage.sync.clear(function() {
@@ -103,6 +121,9 @@ document.querySelector("#paste").addEventListener("click", function() {
 
 // 복사한 데이터를 크롬 스토리지에 저장했다가 (popup을 실행할 때) 불러온다.
 chrome.storage.sync.get(function (data) {
+    document.querySelector("#alert-flag").checked = !!data.alertFlag;
+    document.querySelector("#alert-mail").checked = !!data.alertMail;
+    document.querySelector("#alert-sms").checked = !!data.alertSms;
     if(data.copiedText) {
         document.querySelector("#textBox").value = data.copiedText;
     }
