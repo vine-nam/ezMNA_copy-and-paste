@@ -63,7 +63,7 @@ document.querySelector("#copy").addEventListener("click", function() {
         file: 'js/copy.js'
     }, function(result) {
         if (result !== undefined && result.length > 0 && result[0].length > 0) {
-            copyToClipborad(result[0]);
+            // copyToClipborad(result[0]);
             document.querySelector('#message').innerText = "copied!!";
             document.querySelector('#message').classList.add("successMsg");
             document.querySelector('#textBox').value = result[0];
