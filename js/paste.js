@@ -17,7 +17,7 @@ function alertFlag(index) {
 }
 
 function insertData(element, index) {
-    var data = list[index];
+    var data = list[index].replaceAll('\\', ',');
     if (element.tagName === "INPUT") {
         element.value = data;
     } else if (element.tagName === "SELECT")  {  

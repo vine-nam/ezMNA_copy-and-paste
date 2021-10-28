@@ -1,7 +1,7 @@
 var data = "";
 
 function copyData(element) {
-    data += element.value + ",";
+    data += element.value.replaceAll(',', '\\\\') + ",";
 }
 
 document.body.querySelectorAll(".popup_main").forEach(function (e) {
