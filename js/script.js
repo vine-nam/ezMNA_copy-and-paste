@@ -75,20 +75,22 @@ document.querySelector("#clear").addEventListener("click", function() {
     });
 });
 
-document.querySelector("#copy").addEventListener("click", function() {
+document.querySelector("#copy").addEventListener("click", async function() {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     messageDivInit();
-    chrome.tabs.executeScript({
-        file: 'js/copy.js'
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ['js/copy.js']
     }, function(result) {
-        if (result !== undefined && result.length > 0 && result[0].length > 0) {
+        if (result !== undefined && result.length > 0 && result[0].result.length > 0) {
             // copyToClipborad(result[0]);
             document.querySelector('#message').innerText = "copied!!";
             document.querySelector('#message').classList.add("successMsg");
-            document.querySelector('#textBox').value = result[0];
+            document.querySelector('#textBox').value = result[0].result;
             
             // 크롬 스토리지에 복사한 데이터 저장
             chrome.storage.sync.set({
-                copiedText: result[0]
+                copiedText: result[0].result
             });
         } else {
             document.querySelector('#message').innerText = "failed..";
@@ -97,25 +99,27 @@ document.querySelector("#copy").addEventListener("click", function() {
     });
 });
 
-document.querySelector("#paste").addEventListener("click", function() {
-    var data = document.querySelector('#textBox').value;
-    var alertData = {
+document.querySelector("#paste").addEventListener("click", async function() {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    let data = document.querySelector('#textBox').value;
+    let alertData = {
         flag: document.querySelector('#alert-flag').checked,
         mail: document.querySelector('#alert-mail').checked,
         sms: document.querySelector('#alert-sms').checked
     };
     messageDivInit();
-    chrome.tabs.executeScript({
-        code: 'var data = "' + data + '"; var alertData = ' + JSON.stringify(alertData) + ';'
-    }, function() {
-        chrome.tabs.executeScript({
-            file: 'js/paste.js'
-        }, function(error) {
-            if (error !== "") {
-                document.querySelector('#message').innerText = error;
-                document.querySelector('#message').classList.add("errorMsg");
-            }
-        });
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: pasteData,
+        args: [data, alertData]
+    }, function(result) {
+        if (result !== undefined && result.length > 0 && result[0].result !== "") {
+            document.querySelector('#message').innerText = result[0].result;
+            document.querySelector('#message').classList.add("errorMsg");
+        } else {
+            document.querySelector('#message').innerText = "success";
+            document.querySelector('#message').classList.add("successMsg");
+        }
     });
 })
 
